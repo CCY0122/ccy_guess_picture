@@ -270,12 +270,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(num++ > 5){timer.cancel();}
+                        if(num++ > 5){
+                            colorFlag=true;
+                            timer.cancel();
+                        }
                             for (int z = 0; z < mHasSelectList.size(); z++) {
                                 if(colorFlag) {
                                     mHasSelectList.get(z).button.setTextColor(Color.RED);
                                 }else {
-                                    mHasSelectList.get(z).button.setTextColor(Color.WHITE);
+                                    mHasSelectList.get(z).button.setTextColor(Color.BLACK);
                                 }
                         }
                         colorFlag = !colorFlag;
@@ -369,6 +372,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mHasSelectList.get(i).button.setText(bean.text);
                 mHasSelectList.get(i).isVisible = true;
                 mHasSelectList.get(i).text = bean.text;
+                mHasSelectList.get(i).button.setTextColor(Color.BLACK);
                 //记录索引
                 mHasSelectList.get(i).index = bean.index;
                 Log.d("ccy","out");
