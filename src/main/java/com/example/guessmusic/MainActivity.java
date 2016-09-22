@@ -356,7 +356,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String b = text[i];
             text[i] = text[a];
             text[a] = b;
-
         }
         return text;
     }
