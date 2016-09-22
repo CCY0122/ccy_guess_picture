@@ -13,6 +13,14 @@
         android:background="#55EEE685"
         android:gravity="center"/>
     <Button
+        android:id="@+id/look_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="查看排行"
+        android:layout_toLeftOf="@+id/show_answer"
+        android:background="#88EEE685"
+        android:gravity="center"/>
+    <Button
         android:id="@+id/show_answer"
         android:layout_width="wrap_content"
         android:layout_height="35dp"

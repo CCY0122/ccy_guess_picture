@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -25,12 +26,17 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guessmusic.com.example.guessmusic.BmobUtil;
+import com.example.guessmusic.com.example.guessmusic.RankActivity;
 import com.example.guessmusic.com.example.guessmusic.bean.ImageBean;
 import com.example.guessmusic.com.example.guessmusic.bean.ImageDate;
+import com.example.guessmusic.com.example.guessmusic.bean.RankBean;
 import com.example.guessmusic.com.example.guessmusic.bean.TextBean;
+import com.example.guessmusic.com.example.guessmusic.ui.AllPassDialog;
 import com.example.guessmusic.com.example.guessmusic.ui.PassStageDialog;
 import com.example.guessmusic.com.example.guessmusic.ui.ShowAnswerDialog;
 import com.example.guessmusic.com.example.guessmusic.ui.TextSelectGridView;
@@ -45,6 +51,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.bmob.v3.Bmob;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,TextSelectGridView.onItemCheckedListener {
 
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView coin_text;
     private TextView title_text;
     private Button show_answer;
+    private Button look_rank;
 
     private ObjectAnimator anim;
     private ObjectAnimator anim2;
@@ -76,9 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ShowAnswerDialog showAnswerDialog;
     private WarningDialog warningDialog;
 
+    private RankBean bmobRank;
+    private AllPassDialog allPassDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bmob.initialize(this,"40858cfeb8ca5b8f1475487c6899db50");
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -127,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         show_answer = (Button) findViewById(R.id.show_answer);
         showAnswerDialog = new ShowAnswerDialog();
         warningDialog = new WarningDialog();
+        look_rank = (Button) findViewById(R.id.look_rank);
 
 
         mGridView.setOnItemCheckedListener(this);
@@ -134,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_top_coin.setOnClickListener(this);
         btn_top_back.setOnClickListener(this);
         show_answer.setOnClickListener(this);
+        look_rank.setOnClickListener(this);
         passStageDialog.setOnPassClick(new PassStageDialog.OnPassClick() {
             @Override
             public void onPass(View v, int count) {
@@ -199,6 +215,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 showAnswerDialog.show(getFragmentManager(),"2");
                 break;
+            case R.id.look_rank:
+                Intent intent = new Intent(MainActivity.this,RankActivity.class);
+                startActivity(intent);
         }
     }
 
@@ -389,7 +408,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("ccy","in");
             if(currentStage>=ImageDate.imageDate.length-1){
                 //通关逻辑
-                Toast.makeText(this,"通关",Toast.LENGTH_SHORT).show();
+                allPassDialog = new AllPassDialog();
+                allPassDialog.setOnCheckListener(new AllPassDialog.OnCheckListener() {
+                    @Override
+                    public void onCheck(String name, String note) {
+                        if("".equals(name)){name="无名氏";}
+                        if("".equals(note)){note="这个人很懒木有留言";}
+                        bmobRank =new RankBean(name,currentMoney,note);
+                        new BmobUtil().saveToBmob(bmobRank);
+                        allPassDialog.dismiss();
+                        getSharedPreferences("myDate",0).edit().clear().commit();
+                        Intent intent = new Intent(MainActivity.this,RankActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                allPassDialog.show(getFragmentManager(),"4");
                 return;
             }
             passStageDialog.show(getFragmentManager(),"1");

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="340dp"
+        android:orientation="vertical"
+        android:background="@drawable/all_pass_bg">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="恭喜你通关啦！"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_margin="20dp"/>
+        <EditText
+            android:id="@+id/all_pass_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="尊姓大名"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            />
+        <EditText
+            android:id="@+id/all_pass_note"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="想说的话~"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:id="@+id/all_pass_btn"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="确定"/>
+
+    </LinearLayout>
+
+</LinearLayout>

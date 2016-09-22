@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/index_background_2">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="排行榜"
         android:gravity="center"
         android:textSize="40sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="通关后即可加入排行榜"/>
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/rank_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

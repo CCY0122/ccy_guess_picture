@@ -94,7 +94,6 @@ public class TextSelectGridView extends GridView {
            }
            textBean.button.setText(textBean.text);
 
-           Log.d("ccy",""+position+"==="+textBean.index);
 
 
            return convertView;
