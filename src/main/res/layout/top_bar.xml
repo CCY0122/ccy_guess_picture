@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:alpha="0.8"
+    android:gravity="center_vertical">
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="0"
+        android:textSize="20sp"
+        android:background="#55EEE685"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/show_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:layout_toLeftOf="@+id/game_coin"
+        android:background="#88EEE685"
+        android:text="看答案"/>
+    <LinearLayout
+        android:id="@+id/game_coin"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/game_coin_icon"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/coin_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200"
+            android:textSize="23sp"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
