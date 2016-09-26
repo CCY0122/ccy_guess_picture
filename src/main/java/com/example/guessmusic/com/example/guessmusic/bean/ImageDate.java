@@ -1,5 +1,8 @@
 package com.example.guessmusic.com.example.guessmusic.bean;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/20.
  */

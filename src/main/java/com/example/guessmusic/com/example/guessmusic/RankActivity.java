@@ -41,8 +41,20 @@ public class RankActivity extends AppCompatActivity {
         note = (TextView) findViewById(R.id.rank_note);
         money = (TextView) findViewById(R.id.rank_money);
         updateList();
+//        text();
 
+    }
 
+    private void text() {
+        mList = new ArrayList<>();
+        RankBean r1 = new RankBean("123",123,"123");
+        RankBean r2 = new RankBean("asd",234,"asd");
+        for (int i = 0; i < 8; i++) {
+            mList.add(r1);
+            mList.add(r2);
+        }
+        rankListViewAdapter = new RankListViewAdapter(this,mList);
+        listView.setAdapter(rankListViewAdapter);
     }
 
     private void updateList() {
@@ -59,9 +71,11 @@ public class RankActivity extends AppCompatActivity {
                         mList.add(bean);
                     }
                     Log.d("ccy1","查询成功，list size="+mList.size());
+//                    mList.add(new RankBean("测试",0,"测试"));
+//                    mList.add(new RankBean("测试",1,"测试"));
                     rankListViewAdapter = new RankListViewAdapter(getApplicationContext(),mList);
                     listView.setAdapter(rankListViewAdapter);
-                    rankListViewAdapter.notifyDataSetChanged();
+//                    rankListViewAdapter.notifyDataSetChanged();
                 }else {
                     Log.d("ccy1","查询失败");
                 }

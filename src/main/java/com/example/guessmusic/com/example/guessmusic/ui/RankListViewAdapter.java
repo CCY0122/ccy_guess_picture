@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -48,19 +50,19 @@ public class RankListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
         if(convertView == null){
-            v = LayoutInflater.from(context).inflate(R.layout.rank_item,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.rank_item,null);
             holder = new Holder();
-            holder.name = (TextView) v.findViewById(R.id.rank_name);
-            holder.note= (TextView) v.findViewById(R.id.rank_note);
-            holder.money = (TextView) v.findViewById(R.id.rank_money);
-            v.setTag(holder);
+            holder.name = (TextView) convertView.findViewById(R.id.rank_name);
+            holder.note= (TextView) convertView.findViewById(R.id.rank_note);
+            holder.money = (TextView) convertView.findViewById(R.id.rank_money);
+            convertView.setTag(holder);
         }else {
-            holder = (Holder) v.getTag();
+            holder = (Holder) convertView.getTag();
         }
             holder.name.setText(list.get(position).getName());
             holder.note.setText(list.get(position).getNote());
             holder.money.setText(list.get(position).getMoney()+"");
-        return v;
+        return convertView;
     }
     class Holder{
         public TextView name;
